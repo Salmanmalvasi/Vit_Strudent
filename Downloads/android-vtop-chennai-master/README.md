@@ -1,7 +1,5 @@
 # VIT Student
 
-![CI](https://github.com/therealsujitk/android-vtop-chennai/actions/workflows/build_push.yml/badge.svg) ![License](https://img.shields.io/badge/license-GPL--3.0-orange) ![Release](https://vtopchennai.therealsuji.tk/release.svg) ![Downloads](https://vtopchennai.therealsuji.tk/downloads.svg)
-
 An android application for the students of VIT Chennai to
 access [VTOP](https://vtopcc.vit.ac.in/vtop) and [Moodle](https://lms.vit.ac.in/).
 
@@ -14,34 +12,16 @@ access [VTOP](https://vtopcc.vit.ac.in/vtop) and [Moodle](https://lms.vit.ac.in/
 - Notification badges for new marks, new announcements, etc.
 - Sign in using your Moodle credentials to view and submit your assignments.
 - Material 3 theming (light & dark) for complete customization.
+- GPA Calculator with VIT grading system.
 
-## Contributing
+## Privacy Policy
 
-Anyone and everyone is welcome to contribute. Please take a moment to review
-our [code of conduct](/CODE_OF_CONDUCT.md).
-
-#### Issues
-
-If you've caught a bug or you'd like a new feature to be added, feel free to open an issue so that
-the same can be discussed. You can also open an issue if you have a question about this project.
-
-#### Pull Requests
-
-If you're interested in contributing to this project, make sure the issue you'd like to resolve is
-open (if not, create one) and do not start resolving said issue until you've been assigned to it.
-Good knowledge in android development is recommended, you can always ask for directions if you're
-stuck or don't know where to start. If you're new here you can take a look at
-the [good first issues](https://github.com/therealsujitk/android-vtop-chennai/labels/good%20first%20issue).
-
-## Links
-
-- [Download the APK](https://vtopchennai.therealsuji.tk/)
-- [View the privacy policy](https://vtopchennai.therealsuji.tk/privacy-policy)
+This app is developed by **Salman Malvasi** and respects your privacy. No personal data is collected or shared.
 
 ## License
 
 ```
-Copyright 2020 - 2024  Sujit Kumar
+Copyright 2024  Salman Malvasi
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

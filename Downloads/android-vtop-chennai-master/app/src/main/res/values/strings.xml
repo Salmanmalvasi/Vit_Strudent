@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY app_name "VIT Student">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY app_name "VIT Student by Salman Malvasi">]>
 
 <resources>
     <string name="app_name">&app_name;</string>
@@ -9,7 +9,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign In</string>
-    <string name="privacy">Privacy Policy</string>
+
 
     <!-- MainActivity Strings -->
     <string name="home">Home</string>
@@ -124,7 +124,7 @@
     <string name="cancel">Cancel</string>
 
     <!-- Feedback BottomSheet Strings -->
-    <string name="send_feedback">Send Feedback</string>
+
     <string name="contact_developer">Contact the developer</string>
     <string name="open_issue">Open an issue</string>
     <string name="request_feature">Request a feature</string>
@@ -134,9 +134,7 @@
     <string name="sign_out_app">Sign out of &app_name;</string>
 
     <!-- Share Intent Strings -->
-    <string name="share_subject">Get the &app_name; android app</string>
-    <string name="share_text">Visit %s to download the latest version of &app_name;.</string>
-    <string name="share_title">Share \"&app_name;\" via</string>
+
 
     <!-- Empty State String -->
     <string name="fetch_assignments">Fetching your assignments</string>

@@ -21,7 +21,7 @@ jobs:
 
       - name: Run git push
         run: |
-          git config --global user.email "bot@therealsuji.tk"
+          git config --global user.email "salmanmalvasi@gmail.com"
           git config --global user.name "earphone-jack"
           git add --all
           git commit -m "Format files from commit $GITHUB_SHA" || true
