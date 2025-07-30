@@ -128,9 +128,10 @@ public class ProfileFragment extends Fragment {
                         amoledSwitch.setChecked(sharedPreferences.getBoolean("amoledMode", false));
                         amoledSwitch.setOnCheckedChangeListener((compoundButton, isAmoledModeEnabled) -> {
                             sharedPreferences.edit().putBoolean("amoledMode", isAmoledModeEnabled).apply();
-                            Bundle applyDynamicColors = new Bundle();
-                            applyDynamicColors.putBoolean("amoledMode", isAmoledModeEnabled);
-                            getParentFragmentManager().setFragmentResult("applyDynamicColors", applyDynamicColors);
+                            // Disable dynamic colors to use our custom black and white theme
+                            // Bundle applyDynamicColors = new Bundle();
+                            // applyDynamicColors.putBoolean("amoledMode", isAmoledModeEnabled);
+                            // getParentFragmentManager().setFragmentResult("applyDynamicColors", applyDynamicColors);
                         });
 
                         new MaterialAlertDialogBuilder(context)

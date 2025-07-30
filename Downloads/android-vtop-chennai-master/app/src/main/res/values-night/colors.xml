@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Black and White Theme Colors - Night Mode (Inverted) -->
+    
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorOnPrimary">#000000</color>
+    <color name="colorPrimaryContainer">#333333</color>
+    <color name="colorOnPrimaryContainer">#FFFFFF</color>
+    
+    <!-- Secondary Colors -->
+    <color name="colorSecondary">#CCCCCC</color>
+    <color name="colorOnSecondary">#000000</color>
+    <color name="colorSecondaryContainer">#2A2A2A</color>
+    <color name="colorOnSecondaryContainer">#FFFFFF</color>
+    
+    <!-- Surface Colors -->
+    <color name="colorSurface">#000000</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorSurfaceVariant">#1A1A1A</color>
+    <color name="colorOnSurfaceVariant">#CCCCCC</color>
+    
+
+    
+    <!-- Error Colors -->
+    <color name="colorError">#FFFFFF</color>
+    <color name="colorOnError">#000000</color>
+    <color name="colorErrorContainer">#4A0000</color>
+    <color name="colorOnErrorContainer">#FFFFFF</color>
+    
+    <!-- Outline Colors -->
+    <color name="colorOutline">#666666</color>
+    <color name="colorOutlineVariant">#333333</color>
+    
+
+    
+    <!-- Legacy Colors for Compatibility -->
+    <color name="launcher_icon_background_color">#FFFFFF</color>
+    
+    <!-- Additional Utility Colors -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_light">#1A1A1A</color>
+    <color name="gray_medium">#666666</color>
+    <color name="gray_dark">#CCCCCC</color>
+</resources> 

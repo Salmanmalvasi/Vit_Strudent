@@ -11,7 +11,8 @@ import tk.therealsuji.vtopchennai.helpers.SettingsRepository;
 public class VTOP extends Application {
     @Override
     public void onCreate() {
-        DynamicColors.applyToActivitiesIfAvailable(this);
+        // Disable dynamic colors to use our custom black and white theme
+        // DynamicColors.applyToActivitiesIfAvailable(this);
 
         int theme = SettingsRepository.getTheme(this);
         if (theme == SettingsRepository.THEME_DAY) {

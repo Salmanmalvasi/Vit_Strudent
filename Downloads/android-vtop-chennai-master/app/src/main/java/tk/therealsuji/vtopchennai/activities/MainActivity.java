@@ -215,7 +215,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         boolean amoledMode = SettingsRepository.getSharedPreferences(this).getBoolean("amoledMode", false);
-        SettingsRepository.applyDynamicColors(this, amoledMode);
+        // Disable dynamic colors to use our custom black and white theme
+        // SettingsRepository.applyDynamicColors(this, amoledMode);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -270,7 +271,8 @@ public class MainActivity extends AppCompatActivity {
         syncDataState.putBoolean("isLoading", false);
         getSupportFragmentManager().setFragmentResultListener("syncData", this, (requestKey, result) -> this.syncData());
         getSupportFragmentManager().setFragmentResultListener("getUnreadCount", this, (requestKey, result) -> this.getUnreadCount());
-        getSupportFragmentManager().setFragmentResultListener("applyDynamicColors", this, (requestKey, result) -> this.recreate());
+        // Disable dynamic colors listener to use our custom black and white theme
+        // getSupportFragmentManager().setFragmentResultListener("applyDynamicColors", this, (requestKey, result) -> this.recreate());
 
         this.getUnreadCount();
 

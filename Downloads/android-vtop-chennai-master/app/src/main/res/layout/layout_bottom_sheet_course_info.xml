@@ -90,6 +90,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="8dp"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
@@ -108,6 +112,15 @@
                     android:text="@string/attendance"
                     android:textAlignment="center"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="(Tap to toggle format)"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

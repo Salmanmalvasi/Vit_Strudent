@@ -1,4 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="launcher_icon_background_color">@color/m3_sys_color_light_primary</color>
+    <!-- Black and White Theme Colors -->
+    
+    <!-- Primary Colors -->
+    <color name="colorPrimary">#000000</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorPrimaryContainer">#E0E0E0</color>
+    <color name="colorOnPrimaryContainer">#000000</color>
+    
+    <!-- Secondary Colors -->
+    <color name="colorSecondary">#666666</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorSecondaryContainer">#F5F5F5</color>
+    <color name="colorOnSecondaryContainer">#000000</color>
+    
+    <!-- Surface Colors -->
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorSurfaceVariant">#F0F0F0</color>
+    <color name="colorOnSurfaceVariant">#666666</color>
+    
+
+    
+    <!-- Error Colors -->
+    <color name="colorError">#000000</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorErrorContainer">#FFE0E0</color>
+    <color name="colorOnErrorContainer">#000000</color>
+    
+    <!-- Outline Colors -->
+    <color name="colorOutline">#CCCCCC</color>
+    <color name="colorOutlineVariant">#E0E0E0</color>
+    
+
+    
+    <!-- Legacy Colors for Compatibility -->
+    <color name="launcher_icon_background_color">#000000</color>
+    
+    <!-- Additional Utility Colors -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_medium">#CCCCCC</color>
+    <color name="gray_dark">#666666</color>
 </resources>
