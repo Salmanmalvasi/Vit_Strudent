@@ -28,6 +28,7 @@ import java.util.Set;
 import com.salmanmalvasi.vitstudent.R;
 import com.salmanmalvasi.vitstudent.helpers.SettingsRepository;
 import com.salmanmalvasi.vitstudent.models.Course;
+import androidx.core.content.ContextCompat;
 
 /**
  * ┬─── Courses Hierarchy
@@ -192,6 +193,17 @@ public class CoursesItemAdapter extends RecyclerView.Adapter<CoursesItemAdapter.
 
             attendanceText.setText(new DecimalFormat("#'%'").format(courseItem.attendancePercentage));
             attendanceProgress.setProgress(courseItem.attendancePercentage);
+
+            // Set attendance text color based on percentage for better readability
+            int attendanceColor;
+            if (courseItem.attendancePercentage < 50) {
+                attendanceColor = ContextCompat.getColor(this.courseItem.getContext(), R.color.attendance_low);
+            } else if (courseItem.attendancePercentage < 75) {
+                attendanceColor = ContextCompat.getColor(this.courseItem.getContext(), R.color.attendance_medium);
+            } else {
+                attendanceColor = ContextCompat.getColor(this.courseItem.getContext(), R.color.attendance_high);
+            }
+            attendanceText.setTextColor(attendanceColor);
 
             if (SettingsRepository.getCGPA(this.courseItem.getContext()) < 9 && courseItem.attendancePercentage < 75) {
                 attendanceProgress.setSecondaryProgress(75);

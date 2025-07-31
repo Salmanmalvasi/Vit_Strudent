@@ -99,9 +99,10 @@ public class VTOPService extends Service {
     Map<Integer, Course> theoryCourses, labCourses, projectCourses;
     Map<String, CumulativeMark> cumulativeMarks;
     Map<String, Slot> theorySlots, labSlots, projectSlots;
-    Map<String, String> semesters;
-    String username, password, semesterID;
+    String username, password;
     CompositeDisposable compositeDisposable;
+    Map<String, String> semesters;
+    String semesterID;
 
     public void clearCallback() {
         this.callback = null;
@@ -129,6 +130,7 @@ public class VTOPService extends Service {
         this.appDatabase = AppDatabase.getInstance(getApplicationContext());
         this.sharedPreferences = SettingsRepository.getSharedPreferences(getApplicationContext());
         this.compositeDisposable = new CompositeDisposable();
+        this.semesters = new HashMap<>();
 
         this.createWebView();
     }
@@ -234,7 +236,7 @@ public class VTOPService extends Service {
                                     break;
                                 }
 
-                                getSemesters();
+                                getName();
                                 pageState = PageState.HOME;
                                 break;
                             default:
@@ -629,98 +631,9 @@ public class VTOPService extends Service {
                 });
     }
 
-    /**
-     * Function to get a list of the semesters. These semesters are obtained from the Timetable page.
-     */
-    private void getSemesters() {
-        /*
-         *  JSON response format
-         *
-         *  {
-         *      "semesters": [
-         *          {
-         *              "name": "Fall Semester 2020-21",
-         *              "id": "CH2020211"
-         *          },
-         *          {
-         *              "name": "Winter Semester 2020-21",
-         *              "id": "CH2020215"
-         *          },
-         *          ...
-         *      ]
-         *  }
-         */
-        webView.evaluateJavascript("(function() {" +
-                "var data = 'verifyMenu=true&authorizedID=' + $('#authorizedIDX').val() + '&_csrf=' + $('input[name=\"_csrf\"]').val() + '&nocache=@(new Date().getTime())';" +
-                "var response = {};" +
-                "$.ajax({" +
-                "    type: 'POST'," +
-                "    url : 'academics/common/StudentTimeTableChn'," +
-                "    data : data," +
-                "    async: false," +
-                "    success: function(res) {" +
-                "        if (res.toLowerCase().includes('not authorized')) {" +
-                "            response.error_code = 1;" +
-                "            response.error_message = 'Unauthorised user agent';" +
-                "        } else if (res.toLowerCase().includes('time table')) {" +
-                "            var doc = new DOMParser().parseFromString(res, 'text/html');" +
-                "            var options = doc.getElementById('semesterSubId').getElementsByTagName('option');" +
-                "            var semesters = [];" +
-                "            for(var i = 0; i < options.length; ++i) {" +
-                "                if(!options[i].value) {" +
-                "                    continue;" +
-                "                }" +
-                "                var semester = {" +
-                "                    name: options[i].innerText," +
-                "                    id: options[i].value" +
-                "                };" +
-                "                semesters.push(semester);" +
-                "            }" +
-                "            response.semesters = semesters;" +
-                "        }" +
-                "    }" +
-                "});" +
-                "return response;" +
-                "})();", responseString -> {
-            try {
-                JSONObject response = new JSONObject(responseString);
 
-                if (response.has("error_code")) {
-                    if (response.getInt("error_code") == 1) {
-                        Toast.makeText(getApplicationContext(), "Error " + 107 + ". Unauthorised user agent, attempting to update. Report a bug if this issue prevails.", Toast.LENGTH_SHORT).show();
-                        updateUserAgent();
-                        return;
-                    }
-                }
 
-                JSONArray semesterArray = response.getJSONArray("semesters");
-                this.semesters = new HashMap<>();
 
-                for (int i = 0; i < semesterArray.length(); ++i) {
-                    JSONObject semesterObject = semesterArray.getJSONObject(i);
-                    this.semesters.put(semesterObject.getString("name"), semesterObject.getString("id"));
-                }
-
-                // Automatically select the current semester (assume first in the list is current)
-                if (semesterArray.length() > 0) {
-                    JSONObject currentSemester = semesterArray.getJSONObject(0);
-                    setSemester(currentSemester.getString("name"));
-                } else {
-                    this.endService(true);
-                }
-            } catch (Exception e) {
-                error(201, e.getLocalizedMessage());
-            }
-        });
-    }
-
-    /**
-     * Function to set the semester ID based on the semester selected.
-     */
-    public void setSemester(String semester) {
-        this.semesterID = this.semesters.get(semester);
-        getName();
-    }
 
     /**
      * Function to save the name of the user in SharedPreferences.
@@ -857,7 +770,7 @@ public class VTOPService extends Service {
          *  }
          */
         webView.evaluateJavascript("(function() {" +
-                "var data = '_csrf=' + $('input[name=\"_csrf\"]').val() + '&semesterSubId=' + '" + semesterID + "' + '&authorizedID=' + $('#authorizedIDX').val();" +
+                "var data = '_csrf=' + $('input[name=\"_csrf\"]').val() + '&authorizedID=' + $('#authorizedIDX').val();" +
                 "var response = {" +
                 "    courses: []" +
                 "};" +
@@ -1049,7 +962,7 @@ public class VTOPService extends Service {
          *  }
          */
         webView.evaluateJavascript("(function() {" +
-                "var data = '_csrf=' + $('input[name=\"_csrf\"]').val() + '&semesterSubId=' + '" + semesterID + "' + '&authorizedID=' + $('#authorizedIDX').val();" +
+                "var data = '_csrf=' + $('input[name=\"_csrf\"]').val() + '&authorizedID=' + $('#authorizedIDX').val();" +
                 "var response = {" +
                 "    lab: []," +
                 "    theory: []" +
@@ -1264,7 +1177,7 @@ public class VTOPService extends Service {
          *  }
          */
         webView.evaluateJavascript("(function() {" +
-                "var data = '_csrf=' + $('input[name=\"_csrf\"]').val() + '&semesterSubId=' + '" + semesterID + "' + '&authorizedID=' + $('#authorizedIDX').val();" +
+                "var data = '_csrf=' + $('input[name=\"_csrf\"]').val() + '&authorizedID=' + $('#authorizedIDX').val();" +
                 "var response = {" +
                 "    attendance: []" +
                 "};" +
@@ -1413,7 +1326,7 @@ public class VTOPService extends Service {
          *  }
          */
         webView.evaluateJavascript("(function() {" +
-                "var data = 'semesterSubId=' + '" + semesterID + "' + '&authorizedID=' + $('#authorizedIDX').val()  + '&_csrf=' + $('input[name=\"_csrf\"]').val();" +
+                "var data = 'authorizedID=' + $('#authorizedIDX').val() + '&_csrf=' + $('input[name=\"_csrf\"]').val();" +
                 "var response = {" +
                 "    marks: []" +
                 "};" +
@@ -2577,6 +2490,76 @@ public class VTOPService extends Service {
         }
 
         return jsonObject.getDouble(key);
+    }
+
+    /**
+     * Public method to fetch semesters and return them via callback
+     */
+    public void fetchSemesters() {
+        webView.evaluateJavascript("(function() {" +
+                "var data = 'verifyMenu=true&authorizedID=' + $('#authorizedIDX').val() + '&_csrf=' + $('input[name=\"_csrf\"]').val() + '&nocache=@(new Date().getTime())';" +
+                "var response = {};" +
+                "$.ajax({" +
+                "    type: 'POST'," +
+                "    url : 'academics/common/StudentTimeTableChn'," +
+                "    data : data," +
+                "    async: false," +
+                "    success: function(res) {" +
+                "        if (res.toLowerCase().includes('not authorized')) {" +
+                "            response.error_code = 1;" +
+                "            response.error_message = 'Unauthorised user agent';" +
+                "        } else if (res.toLowerCase().includes('time table')) {" +
+                "            var doc = new DOMParser().parseFromString(res, 'text/html');" +
+                "            var options = doc.getElementById('semesterSubId').getElementsByTagName('option');" +
+                "            var semesters = [];" +
+                "            for(var i = 0; i < options.length; ++i) {" +
+                "                if(!options[i].value) {" +
+                "                    continue;" +
+                "                }" +
+                "                semesters.push(options[i].innerText);" +
+                "            }" +
+                "            response.semesters = semesters;" +
+                "        }" +
+                "    }" +
+                "});" +
+                "return response;" +
+                "})();", responseString -> {
+            try {
+                JSONObject response = new JSONObject(responseString);
+
+                if (response.has("error_code")) {
+                    if (response.getInt("error_code") == 1) {
+                        if (callback != null) {
+                            callback.onForceSignOut();
+                        }
+                        return;
+                    }
+                }
+
+                JSONArray semesterArray = response.getJSONArray("semesters");
+                String[] semesters = new String[semesterArray.length()];
+
+                for (int i = 0; i < semesterArray.length(); ++i) {
+                    semesters[i] = semesterArray.getString(i);
+                }
+
+                if (callback != null) {
+                    callback.onRequestSemester(semesters);
+                }
+            } catch (Exception e) {
+                if (callback != null) {
+                    callback.onForceSignOut();
+                }
+            }
+        });
+    }
+
+    /**
+     * Function to set the semester ID based on the semester selected.
+     */
+    public void setSemester(String semester) {
+        this.semesterID = this.semesters.get(semester);
+        getName();
     }
 
     public interface Callback {

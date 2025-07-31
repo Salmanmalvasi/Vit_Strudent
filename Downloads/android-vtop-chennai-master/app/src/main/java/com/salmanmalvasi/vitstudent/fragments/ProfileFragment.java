@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
@@ -32,6 +34,8 @@ import com.salmanmalvasi.vitstudent.adapters.ProfileGroupAdapter;
 import com.salmanmalvasi.vitstudent.helpers.SettingsRepository;
 
 public class ProfileFragment extends Fragment {
+    private ActivityResultLauncher<Intent> themeSelectorLauncher;
+
     /*
         User Related Profile Items
      */
@@ -170,8 +174,36 @@ public class ProfileFragment extends Fragment {
                     },
                     null
             ),
+            new ItemData(
+                    R.drawable.ic_appearance,
+                    "Theme",
+                    "Choose your preferred color theme",
+                    context -> {
+                        Intent intent = new Intent(context, com.salmanmalvasi.vitstudent.activities.ThemeSelectorActivity.class);
+                        themeSelectorLauncher.launch(intent);
+                    }
+            ),
 
 
+            new ItemData(
+                    R.drawable.ic_privacy,
+                    R.string.privacy_policy,
+                    context -> {
+                        Intent intent = new Intent(context, com.salmanmalvasi.vitstudent.activities.PrivacyPolicyActivity.class);
+                        context.startActivity(intent);
+                    },
+                    null
+            ),
+            new ItemData(
+                    R.drawable.ic_link,
+                    "Open Source",
+                    "View source code on GitHub",
+                    context -> {
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(android.net.Uri.parse("https://github.com/Salmanmalvasi/Vit_Strudent"));
+                        context.startActivity(intent);
+                    }
+            ),
             new ItemData(
                     R.drawable.ic_sign_out,
                     R.string.sign_out,
@@ -233,6 +265,19 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Initialize ActivityResultLauncher for theme selector
+        themeSelectorLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                    if (result.getData().getBooleanExtra("theme_changed", false)) {
+                        // Theme was changed, recreate the activity
+                        requireActivity().recreate();
+                    }
+                }
+            }
+        );
+
         View profileFragment = inflater.inflate(R.layout.fragment_profile, container, false);
 
         View appBarLayout = profileFragment.findViewById(R.id.app_bar);

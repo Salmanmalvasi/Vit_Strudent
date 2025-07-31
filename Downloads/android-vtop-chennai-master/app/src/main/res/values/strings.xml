@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY app_name "VIT Student by Salman Malvasi">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY app_name "StudentCC">]>
 
 <resources>
     <string name="app_name">&app_name;</string>
@@ -47,21 +47,7 @@
     <string name="status">Status: &lt;b>%s&lt;/b></string>
     <string name="average">Average: &lt;b>%f&lt;/b></string>
 
-    <!-- AssignmentsFragment Strings -->
-    <string name="assignments_header">Your Assignments</string>
-    <string name="moodle_sign_in">Sign In to Moodle</string>
-    <string name="moodle_login_description">Sign in using your Moodle credentials</string>
-    <string name="no_due_date">No Due Date</string>
-    <string name="no_description">No description provided.</string>
-    <string name="assignment_no_due">This assignment does not have a due date.</string>
-    <string name="assignment_due">This assignment is due in &lt;b>%s&lt;/b>.</string>
-    <string name="assignment_overdue">This assignment is overdue by &lt;b>%s&lt;/b>.</string>
-    <string name="late_submission">This assignment allows late submission for &lt;b>%s&lt;/b> after the deadline.</string>
-    <string name="no_late_submission">This assignment does not entertain late submission.</string>
-    <string name="your_submissions">Your Submissions</string>
-    <string name="add_submission">Add Submission</string>
-    <string name="submit_assignment">Submit Assignment</string>
-    <string name="submit_confirmation">You are about to submit &lt;b>%d files&lt;/b> for grading, are you sure you want to proceed?</string>
+
 
     <!-- ProfileFragment Strings -->
     <string name="profile_header">Your Profile</string>
@@ -83,11 +69,13 @@
     <string name="recaptcha">reCaptcha</string>
     <string name="verifying_human">Verifying if you are human</string>
     <string name="select_semester">Select a semester</string>
+    <string name="semester_wait">Waiting for semester</string>
+    <string name="semester_gpa">Semester GPA: %s</string>
+    <string name="sign_out_text">Are you sure you want to sign out of this application? You can switch semesters without having to sign out.</string>
     <string name="select">Select</string>
     <string name="server_connect">Connecting to server</string>
     <string name="captcha_wait">Waiting for captcha</string>
     <string name="sign_in_attempt">Attempting to sign you in</string>
-    <string name="semester_wait">Waiting for semester</string>
     <string name="downloading_profile">Downloading Profile</string>
     <string name="downloading_timetable">Downloading Timetable</string>
     <string name="downloading_courses">Downloading Course Info</string>
@@ -120,7 +108,6 @@
     <!-- Sign Out Dialog Strings -->
     <string name="sign_out">Sign Out</string>
     <string name="moodle_sign_out_text">Are you sure you want to sign out of Moodle? You will no longer be able to view your assignments.</string>
-    <string name="sign_out_text">Are you sure you want to sign out of this application? You can switch semesters without having to sign out.</string>
     <string name="cancel">Cancel</string>
 
     <!-- Feedback BottomSheet Strings -->
@@ -128,6 +115,9 @@
     <string name="contact_developer">Contact the developer</string>
     <string name="open_issue">Open an issue</string>
     <string name="request_feature">Request a feature</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="open_source">Open Source</string>
+    <string name="open_source_description">View source code on GitHub</string>
 
     <!-- Sign Out BottomSheet Strings -->
     <string name="sign_out_moodle">Sign out of Moodle</string>
@@ -137,10 +127,8 @@
 
 
     <!-- Empty State String -->
-    <string name="fetch_assignments">Fetching your assignments</string>
-    <string name="no_assignments">Looks like you have no pending assignments :)</string>
-    <string name="no_classes">Looks like you have the day off :)</string>
     <string name="no_data">There\'s nothing here :(</string>
+    <string name="no_classes">Looks like you have the day off :)</string>
     <string name="no_marks">There\'s nothing here yet :(</string>
     <string name="not_authenticated">Looks like you aren\'t signed in :(</string>
 
@@ -153,7 +141,7 @@
     <string name="faculty">Faculty: &lt;b>%s&lt;/b></string>
     <string name="venue">Venue: &lt;b>%s&lt;/b></string>
     <string name="date">Date: &lt;b>%s&lt;/b></string>
-    <string name="timings">Timings: &lt;b>%s - %s&lt;/b></string>
+    <string name="timings" formatted="false">Timings: &lt;b>%s - %s&lt;/b></string>
     <string name="attendance">Attendance</string>
     <string name="na">NA</string>
     <string name="permission_granted">Permission Granted</string>
@@ -170,7 +158,7 @@
     <string name="select_grade">Select Grade</string>
     <string name="calculate_gpa">Calculate GPA</string>
     <string name="clear_all">Clear All</string>
-    <string name="semester_gpa">Semester GPA: %s</string>
+
     <string name="cumulative_gpa">Cumulative GPA: %s</string>
     <string name="gpa_total_credits">Total Credits: %d</string>
     <string name="total_grade_points">Total Grade Points: %.1f</string>
@@ -189,7 +177,7 @@
     <string name="current_credits">Current Credits</string>
     <string name="additional_credits">Additional Credits</string>
     <string name="required_gpa">Required GPA for additional credits</string>
-    <string name="prediction_result">To achieve a target GPA of %s, you need an average GPA of %s in %d additional credits</string>
+    <string name="prediction_result" formatted="false">To achieve a target GPA of %s, you need an average GPA of %s in %d additional credits</string>
     <string name="impossible_target">Target GPA is impossible to achieve with current credits</string>
     <string name="cgpa_calculator">CGPA Calculator</string>
     <string name="cgpa_calculator_description">Calculate your cumulative GPA using existing data</string>

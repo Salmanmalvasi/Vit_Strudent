@@ -61,6 +61,11 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void openPrivacyPolicy() {
+        Intent intent = new Intent(this, PrivacyPolicyActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,22 +75,19 @@ public class LoginActivity extends AppCompatActivity {
         this.sharedPreferences = SettingsRepository.getSharedPreferences(getApplicationContext());
 
         findViewById(R.id.button_sign_in).setOnClickListener(view -> signIn());
+        findViewById(R.id.button_privacy_policy).setOnClickListener(view -> openPrivacyPolicy());
 
 
         this.vtopHelper = new VTOPHelper(this, new VTOPHelper.Initiator() {
             @Override
             public void onLoading(boolean isLoading) {
                 if (isLoading) {
-                    findViewById(R.id.text_view_sign_in).setVisibility(View.INVISIBLE);
-                    findViewById(R.id.progress_bar_loading).setVisibility(View.VISIBLE);
-
+                    findViewById(R.id.loading_overlay).setVisibility(View.VISIBLE);
                     findViewById(R.id.button_sign_in).setEnabled(false);
                     findViewById(R.id.edit_text_username).setEnabled(false);
                     findViewById(R.id.edit_text_password).setEnabled(false);
                 } else {
-                    findViewById(R.id.text_view_sign_in).setVisibility(View.VISIBLE);
-                    findViewById(R.id.progress_bar_loading).setVisibility(View.INVISIBLE);
-
+                    findViewById(R.id.loading_overlay).setVisibility(View.GONE);
                     findViewById(R.id.button_sign_in).setEnabled(true);
                     findViewById(R.id.edit_text_username).setEnabled(true);
                     findViewById(R.id.edit_text_password).setEnabled(true);

@@ -45,6 +45,7 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
 
     private GPACourseAdapter courseAdapter;
     private List<GPACourse> courses;
+    private View fragmentView;
 
     @Nullable
     @Override
@@ -55,6 +56,8 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        fragmentView = view;
 
         initializeViews(view);
         setupRecyclerView();
@@ -102,6 +105,11 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
                 gradeDisplayTexts
         );
         gradeDropdown.setAdapter(adapter);
+
+        // Set a default selection
+        if (gradeDisplayTexts.length > 0) {
+            gradeDropdown.setText(gradeDisplayTexts[0], false);
+        }
     }
 
     private void setupClickListeners() {
@@ -152,6 +160,10 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
                 creditHoursInput.setError("Credit hours must be greater than 0");
                 return;
             }
+            if (creditHours > 10) {
+                creditHoursInput.setError("Credit hours cannot exceed 10");
+                return;
+            }
         } catch (NumberFormatException e) {
             creditHoursInput.setError("Invalid credit hours");
             return;
@@ -165,6 +177,21 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
         // Extract grade from display text (e.g., "A (9.0)" -> "A")
         String actualGrade = grade.split(" ")[0];
 
+        // Validate that the grade is valid
+        String[] validGrades = GPACourse.getAvailableGrades();
+        boolean isValidGrade = false;
+        for (String validGrade : validGrades) {
+            if (validGrade.equals(actualGrade)) {
+                isValidGrade = true;
+                break;
+            }
+        }
+
+        if (!isValidGrade) {
+            gradeDropdown.setError("Please select a valid grade");
+            return;
+        }
+
         // Create and add course
         GPACourse course = new GPACourse(creditHours, actualGrade);
         courseAdapter.addCourse(course);
@@ -173,9 +200,14 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
         // Clear inputs
         creditHoursInput.setText("");
         gradeDropdown.setText("");
+        creditHoursInput.setError(null);
+        gradeDropdown.setError(null);
 
         updateUI();
         updateCreditsDisplay();
+
+        // Show success message
+        Toast.makeText(requireContext(), "Course added successfully!", Toast.LENGTH_SHORT).show();
     }
 
     private void calculateGPA() {
@@ -207,7 +239,9 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
         updateCreditsDisplay();
 
         // Clear result texts
+        if (cgpaResultText != null) {
         cgpaResultText.setVisibility(View.GONE);
+        }
     }
 
     private void calculateCGPA() {
@@ -260,6 +294,12 @@ public class GPACalculatorFragment extends Fragment implements GPACourseAdapter.
         } else {
             noCoursesText.setVisibility(View.GONE);
             coursesRecyclerView.setVisibility(View.VISIBLE);
+        }
+
+        // Update courses count
+        TextView coursesCount = getView().findViewById(R.id.courses_count);
+        if (coursesCount != null) {
+            coursesCount.setText(String.valueOf(courses.size()));
         }
     }
 

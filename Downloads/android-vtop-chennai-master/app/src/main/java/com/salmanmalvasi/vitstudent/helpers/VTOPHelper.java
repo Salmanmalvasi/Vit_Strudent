@@ -240,11 +240,9 @@ public class VTOPHelper {
                     if (reCaptchaDialogFragment != null) {
                         reCaptchaDialogFragment.dismissAllowingStateLoss();
                     }
-
                     if (semesterDialog != null) {
                         semesterDialog.dismiss();
                     }
-
                     initiator.onLoading(false);
                 }
 
@@ -289,10 +287,6 @@ public class VTOPHelper {
             this.captchaDialog.cancel();
         }
 
-        if (this.semesterDialog != null) {
-            this.semesterDialog.cancel();
-        }
-
         if (this.reCaptchaDialogFragment != null) {
             this.reCaptchaDialogFragment.dismissAllowingStateLoss();
         }
@@ -311,6 +305,12 @@ public class VTOPHelper {
 
     public boolean isBound() {
         return this.isBound;
+    }
+
+    public void fetchSemesters() {
+        if (isBound && vtopService != null) {
+            vtopService.fetchSemesters();
+        }
     }
 
     public interface Initiator {

@@ -1,18 +1,13 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp"
-    android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-
-    <!-- Background circle -->
-    <path
-        android:fillColor="#000000"
-        android:pathData="M54,54m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0"/>
+    android:width="120dp"
+    android:height="60dp"
+    android:viewportWidth="120"
+    android:viewportHeight="60">
 
     <!-- Glow effect for S -->
     <path
         android:fillColor="#00BFFF"
-        android:pathData="M30,35 Q40,30 50,35 Q55,40 55,45 Q55,50 50,55 Q45,60 40,55 Q35,50 35,45 Q35,40 40,35 Q45,30 50,35 Q55,40 55,45 Q55,50 50,55 Q45,60 40,55 Q35,50 35,45 Q35,40 40,35"
+        android:pathData="M25,15 Q35,10 45,15 Q50,20 50,25 Q50,30 45,35 Q40,40 35,35 Q30,30 30,25 Q30,20 35,15 Q40,10 45,15 Q50,20 50,25 Q50,30 45,35 Q40,40 35,35 Q30,30 30,25 Q30,20 35,15"
         android:strokeWidth="0.5"
         android:strokeColor="#00BFFF"
         android:alpha="0.3"/>
@@ -20,14 +15,14 @@
     <!-- Letter S -->
     <path
         android:fillColor="#333333"
-        android:pathData="M30,35 Q40,30 50,35 Q55,40 55,45 Q55,50 50,55 Q45,60 40,55 Q35,50 35,45 Q35,40 40,35 Q45,30 50,35 Q55,40 55,45 Q55,50 50,55 Q45,60 40,55 Q35,50 35,45 Q35,40 40,35"
+        android:pathData="M25,15 Q35,10 45,15 Q50,20 50,25 Q50,30 45,35 Q40,40 35,35 Q30,30 30,25 Q30,20 35,15 Q40,10 45,15 Q50,20 50,25 Q50,30 45,35 Q40,40 35,35 Q30,30 30,25 Q30,20 35,15"
         android:strokeWidth="2"
         android:strokeColor="#00BFFF"/>
 
     <!-- Glow effect for X -->
     <path
         android:fillColor="#00BFFF"
-        android:pathData="M65,35 L75,45 L65,55 L75,65 L65,75 L55,65 L65,55 L55,45 Z"
+        android:pathData="M65,15 L75,25 L65,35 L75,45 L65,55 L55,45 L65,35 L55,25 Z"
         android:strokeWidth="0.5"
         android:strokeColor="#00BFFF"
         android:alpha="0.3"/>
@@ -35,39 +30,39 @@
     <!-- Letter X -->
     <path
         android:fillColor="#333333"
-        android:pathData="M65,35 L75,45 L65,55 L75,65 L65,75 L55,65 L65,55 L55,45 Z"
+        android:pathData="M65,15 L75,25 L65,35 L75,45 L65,55 L55,45 L65,35 L55,25 Z"
         android:strokeWidth="2"
         android:strokeColor="#00BFFF"/>
 
     <!-- Inner glow lines for S -->
     <path
-        android:pathData="M40,40 Q45,38 50,40"
+        android:pathData="M35,20 Q40,18 45,20"
         android:strokeWidth="1.5"
         android:strokeColor="#00BFFF"/>
 
     <path
-        android:pathData="M40,50 Q45,52 50,50"
+        android:pathData="M35,30 Q40,32 45,30"
         android:strokeWidth="1.5"
         android:strokeColor="#00BFFF"/>
 
     <!-- Inner glow lines for X -->
     <path
-        android:pathData="M60,40 L70,50"
+        android:pathData="M60,20 L70,30"
         android:strokeWidth="1.5"
         android:strokeColor="#00BFFF"/>
 
     <path
-        android:pathData="M70,40 L60,50"
+        android:pathData="M70,20 L60,30"
         android:strokeWidth="1.5"
         android:strokeColor="#00BFFF"/>
 
     <path
-        android:pathData="M60,50 L70,60"
+        android:pathData="M60,30 L70,40"
         android:strokeWidth="1.5"
         android:strokeColor="#00BFFF"/>
 
     <path
-        android:pathData="M70,50 L60,60"
+        android:pathData="M70,30 L60,40"
         android:strokeWidth="1.5"
         android:strokeColor="#00BFFF"/>
 </vector>

@@ -112,9 +112,20 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<TimetableItemAdap
             if (cgpa < 9 && timetableItem.attendancePercentage != null && timetableItem.attendancePercentage < 75) {
                 ImageView endDrawable = this.timetableItem.findViewById(R.id.image_view_failed_attendance);
                 endDrawable.setImageDrawable(ContextCompat.getDrawable(this.timetableItem.getContext(), R.drawable.ic_feedback));
+
+                // Use our custom attendance colors for better readability
+                int attendanceColor;
+                if (timetableItem.attendancePercentage < 50) {
+                    attendanceColor = ContextCompat.getColor(this.timetableItem.getContext(), R.color.attendance_low);
+                } else if (timetableItem.attendancePercentage < 75) {
+                    attendanceColor = ContextCompat.getColor(this.timetableItem.getContext(), R.color.attendance_medium);
+                } else {
+                    attendanceColor = ContextCompat.getColor(this.timetableItem.getContext(), R.color.attendance_high);
+                }
+
                 DrawableCompat.setTint(
                         DrawableCompat.wrap(endDrawable.getDrawable()),
-                        MaterialColors.getColor(endDrawable, R.attr.colorError)
+                        attendanceColor
                 );
             }
 
@@ -224,9 +235,11 @@ public class TimetableItemAdapter extends RecyclerView.Adapter<TimetableItemAdap
                                     attendanceExcessText.setText(new DecimalFormat("+#;-#").format(attendanceExcess));
 
                                     if (attendanceExcess < 0) {
-                                        attendanceExcessText.setTextColor(MaterialColors.getColor(attendanceExcessText, R.attr.colorError));
+                                        attendanceExcessText.setTextColor(ContextCompat.getColor(attendanceExcessText.getContext(), R.color.attendance_low));
                                     } else if (attendanceExcess == 0) {
-                                        attendanceExcessText.setTextColor(MaterialColors.getColor(attendanceExcessText, R.attr.colorSecondary));
+                                        attendanceExcessText.setTextColor(ContextCompat.getColor(attendanceExcessText.getContext(), R.color.attendance_medium));
+                                    } else {
+                                        attendanceExcessText.setTextColor(ContextCompat.getColor(attendanceExcessText.getContext(), R.color.attendance_high));
                                     }
                                 }
                             }

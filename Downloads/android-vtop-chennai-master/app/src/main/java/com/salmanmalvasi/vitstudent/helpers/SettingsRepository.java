@@ -266,7 +266,7 @@ public class SettingsRepository {
         Toast.makeText(context, Html.fromHtml(context.getString(R.string.downloading_file, fileName), Html.FROM_HTML_MODE_LEGACY), Toast.LENGTH_SHORT).show();
 
         DownloadManager.Request request = new DownloadManager.Request(uri);
-        String encodedFilePath = Uri.encode("VIT Student/" + filePath + "/" + fileName);
+        String encodedFilePath = Uri.encode("StudentCC/" + filePath + "/" + fileName);
         request.addRequestHeader("cookie", cookie);
         request.allowScanningByMediaScanner();
         request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, encodedFilePath);
@@ -446,4 +446,27 @@ public class SettingsRepository {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Temporarily set semester to Winter semester for testing performance tab
+     * This is a temporary method for testing purposes
+     */
+    public static void setTemporaryWinterSemester(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("semester", "Winter Semester 2023-24");
+        editor.apply();
+    }
+
+    /**
+     * Reset semester to current semester (first in the list)
+     * This is a temporary method for testing purposes
+     */
+    public static void resetToCurrentSemester(Context context) {
+        SharedPreferences sharedPreferences = getSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("semester"); // This will make it use the default (current) semester
+        editor.apply();
+    }
+
 }

@@ -7,7 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ImageButton;
+import android.widget.Toast;
+import android.content.Intent;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.OptIn;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.fragment.app.Fragment;
@@ -31,6 +36,9 @@ import com.salmanmalvasi.vitstudent.R;
 import com.salmanmalvasi.vitstudent.adapters.TimetableAdapter;
 import com.salmanmalvasi.vitstudent.helpers.SettingsRepository;
 import com.salmanmalvasi.vitstudent.widgets.InfoCard;
+import com.salmanmalvasi.vitstudent.services.VTOPService;
+import com.salmanmalvasi.vitstudent.helpers.AppDatabase;
+import com.salmanmalvasi.vitstudent.activities.LoginActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -42,11 +50,93 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
+        // Refresh stats when fragment becomes visible
+        if (getView() != null) {
+            loadAndDisplayStats(getView());
+        }
+
         // Firebase Analytics Logging
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, "HomeFragment");
-        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "Home");
-        FirebaseAnalytics.getInstance(this.requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+        FirebaseAnalytics.getInstance(requireContext()).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Initialize views
+        ImageButton spotlightButton = view.findViewById(R.id.image_button_spotlight);
+
+        // Set click listeners
+        if (spotlightButton != null) {
+            spotlightButton.setOnClickListener(v -> {
+                // Navigate to SpotlightFragment
+                SpotlightFragment spotlightFragment = new SpotlightFragment();
+                requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout_fragment_container, spotlightFragment)
+                    .addToBackStack(null)
+                    .commit();
+            });
+        }
+
+        // Set up Quick Action click listeners
+        setupQuickActionListeners(view);
+
+        // Load and display stats
+        loadAndDisplayStats(view);
+    }
+
+    private void setupQuickActionListeners(View view) {
+        // Setup quick action buttons
+        View attendanceCard = view.findViewById(R.id.card_attendance);
+        View cgpaCard = view.findViewById(R.id.card_cgpa);
+        View creditsCard = view.findViewById(R.id.card_credits);
+
+        attendanceCard.setOnClickListener(v -> {
+            // Navigate to PerformanceFragment (attendance tab)
+            PerformanceFragment performanceFragment = new PerformanceFragment();
+            requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout_fragment_container, performanceFragment)
+                .addToBackStack(null)
+                .commit();
+        });
+
+        cgpaCard.setOnClickListener(v -> {
+            // Navigate to GPACalculatorFragment
+            GPACalculatorFragment gpaFragment = new GPACalculatorFragment();
+            requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout_fragment_container, gpaFragment)
+                .addToBackStack(null)
+                .commit();
+        });
+
+        creditsCard.setOnClickListener(v -> {
+            // Navigate to PerformanceFragment (courses tab)
+            PerformanceFragment performanceFragment = new PerformanceFragment();
+            requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frame_layout_fragment_container, performanceFragment)
+                .addToBackStack(null)
+                .commit();
+        });
+
+        // Exams quick action
+        View examsAction = view.findViewById(R.id.quick_action_exams);
+        if (examsAction != null) {
+            examsAction.setOnClickListener(v -> {
+                // Navigate to PerformanceFragment (exams tab)
+                PerformanceFragment performanceFragment = new PerformanceFragment();
+                requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frame_layout_fragment_container, performanceFragment)
+                    .addToBackStack(null)
+                    .commit();
+            });
+        }
     }
 
     @Override
@@ -144,27 +234,13 @@ public class HomeFragment extends Fragment {
 
         getParentFragmentManager().setFragmentResult("getUnreadCount", new Bundle());
 
-        InfoCard attendance = homeFragment.findViewById(R.id.info_card_attendance);
-        InfoCard credits = homeFragment.findViewById(R.id.info_card_credits);
-        InfoCard cgpa = homeFragment.findViewById(R.id.info_card_cgpa);
+        // Load and display real data
+        loadAndDisplayStats(homeFragment);
 
-        float totalCredits;
-
-        try {
-            // Support old integer based credits
-            totalCredits = sharedPreferences.getInt("totalCredits", 0);
-        } catch (Exception ignored) {
-            totalCredits = sharedPreferences.getFloat("totalCredits", 0);
-        }
-
-        if (totalCredits == (int) totalCredits) {
-            credits.setValue(String.valueOf((int) totalCredits));
-        } else {
-            credits.setValue(String.valueOf(totalCredits));
-        }
-
-        attendance.setValue(sharedPreferences.getInt("overallAttendance", 0) + "%");
-        cgpa.setValue(new DecimalFormat("#.00").format(sharedPreferences.getFloat("cgpa", 0)));
+        // Listen for data sync completion to refresh stats
+        getParentFragmentManager().setFragmentResultListener("dataSyncComplete", this, (requestKey, result) -> {
+            loadAndDisplayStats(homeFragment);
+        });
 
         TabLayout days = homeFragment.findViewById(R.id.tab_layout_days);
         String[] dayStrings = {
@@ -219,5 +295,44 @@ public class HomeFragment extends Fragment {
         timetable.setCurrentItem(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1);
 
         return homeFragment;
+    }
+
+    private void loadAndDisplayStats(View view) {
+        if (view == null) return;
+
+        SharedPreferences prefs = SettingsRepository.getSharedPreferences(requireContext());
+
+        // Load attendance
+        int overallAttendance = prefs.getInt("overallAttendance", -1);
+        TextView attendanceValue = view.findViewById(R.id.text_attendance_value);
+        if (attendanceValue != null) {
+            if (overallAttendance >= 0) {
+                attendanceValue.setText(overallAttendance + "%");
+            } else {
+                attendanceValue.setText("N/A");
+            }
+        }
+
+        // Load CGPA
+        float cgpa = prefs.getFloat("cgpa", -1);
+        TextView cgpaValue = view.findViewById(R.id.text_cgpa_value);
+        if (cgpaValue != null) {
+            if (cgpa >= 0) {
+                cgpaValue.setText(String.format("%.2f", cgpa));
+            } else {
+                cgpaValue.setText("N/A");
+            }
+        }
+
+        // Load credits
+        float totalCredits = prefs.getFloat("totalCredits", -1);
+        TextView creditsValue = view.findViewById(R.id.text_credits_value);
+        if (creditsValue != null) {
+            if (totalCredits >= 0) {
+                creditsValue.setText(String.format("%.1f", totalCredits));
+            } else {
+                creditsValue.setText("N/A");
+            }
+        }
     }
 }

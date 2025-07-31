@@ -10,7 +10,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.salmanmalvasi.vitstudent.interfaces.AssignmentsDao;
+
 import com.salmanmalvasi.vitstudent.interfaces.AttendanceDao;
 import com.salmanmalvasi.vitstudent.interfaces.CoursesDao;
 import com.salmanmalvasi.vitstudent.interfaces.ExamsDao;
@@ -19,8 +19,6 @@ import com.salmanmalvasi.vitstudent.interfaces.ReceiptsDao;
 import com.salmanmalvasi.vitstudent.interfaces.SpotlightDao;
 import com.salmanmalvasi.vitstudent.interfaces.StaffDao;
 import com.salmanmalvasi.vitstudent.interfaces.TimetableDao;
-import com.salmanmalvasi.vitstudent.models.Assignment;
-import com.salmanmalvasi.vitstudent.models.Attachment;
 import com.salmanmalvasi.vitstudent.models.Attendance;
 import com.salmanmalvasi.vitstudent.models.Course;
 import com.salmanmalvasi.vitstudent.models.CumulativeMark;
@@ -34,8 +32,6 @@ import com.salmanmalvasi.vitstudent.models.Timetable;
 
 @Database(
         entities = {
-                Assignment.class,
-                Attachment.class,
                 Attendance.class,
                 Course.class,
                 CumulativeMark.class,
@@ -47,9 +43,10 @@ import com.salmanmalvasi.vitstudent.models.Timetable;
                 Staff.class,
                 Timetable.class
         },
-        version = 3,
+        version = 4,
         autoMigrations = {
                 @AutoMigration(from = 1, to = 2),
+                @AutoMigration(from = 3, to = 4),
         }
 )
 public abstract class AppDatabase extends RoomDatabase {
@@ -77,7 +74,7 @@ public abstract class AppDatabase extends RoomDatabase {
         context.deleteDatabase("vtop"); // Delete the deprecated database (used till < v4.0)
     }
 
-    public abstract AssignmentsDao assignmentsDao();
+
 
     public abstract AttendanceDao attendanceDao();
 

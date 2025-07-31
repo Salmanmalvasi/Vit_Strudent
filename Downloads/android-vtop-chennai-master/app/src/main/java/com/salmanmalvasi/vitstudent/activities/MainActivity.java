@@ -1,8 +1,27 @@
+/*
+ * StudentCC - A Student Dashboard for VIT Students (Unofficial)
+ * Copyright (C) 2025 Salman Malvasi
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.salmanmalvasi.vitstudent.activities;
 
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
@@ -214,8 +233,35 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    private void applyTheme() {
+        SharedPreferences prefs = getSharedPreferences("theme_preferences", MODE_PRIVATE);
+        String selectedTheme = prefs.getString("selected_theme", "default");
+
+        switch (selectedTheme) {
+            case "red":
+                setTheme(R.style.Theme_VTOP_Red);
+                break;
+            case "green":
+                setTheme(R.style.Theme_VTOP_Green);
+                break;
+            case "blue":
+                setTheme(R.style.Theme_VTOP_Blue);
+                break;
+            case "purple":
+                setTheme(R.style.Theme_VTOP_Purple);
+                break;
+            case "black":
+                setTheme(R.style.Theme_VTOP_Black);
+                break;
+            default:
+                setTheme(R.style.Theme_VTOP);
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        applyTheme();
         boolean amoledMode = SettingsRepository.getSharedPreferences(this).getBoolean("amoledMode", false);
         // Disable dynamic colors to use our custom black and white theme
         // SettingsRepository.applyDynamicColors(this, amoledMode);
@@ -355,6 +401,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onComplete() {
+                // Notify fragments that data sync is complete
+                Bundle result = new Bundle();
+                getSupportFragmentManager().setFragmentResult("dataSyncComplete", result);
                 restartActivity();
             }
         });
@@ -438,6 +487,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        compositeDisposable.dispose();
+        compositeDisposable.clear();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Handle theme change from ThemeSelectorActivity
+        if (resultCode == RESULT_OK && data != null && data.getBooleanExtra("theme_changed", false)) {
+            // Recreate the activity to apply the new theme
+            recreate();
+        }
     }
 }

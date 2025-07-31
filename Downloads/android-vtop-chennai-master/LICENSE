@@ -1,10 +1,11 @@
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
- Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
- Copyright (C) 2024 Salman Malvasi
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
+Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+Copyright (C) 2025 Salman Malvasi
+
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
 
                             Preamble
 
@@ -140,7 +141,7 @@ System Libraries, or general-purpose tools or generally available free
 programs which are used unmodified in performing those activities but
 which are not part of the work.  For example, Corresponding Source
 includes interface definition files associated with source files for
-the work, and the source code for shared libraries and dynamically
+the work, and source code for shared libraries and dynamically
 linked subprograms that the work is specifically designed to require,
 such as by intimate data communication or control flow between those
 subprograms and other parts of the work.
@@ -449,7 +450,7 @@ covered work, you indicate your acceptance of this License to do so.
   Each time you convey a covered work, the recipient automatically
 receives a license from the original licensors, to run, modify and
 propagate that work, subject to this License.  You are not responsible
-for enforcing compliance by third parties with this License.
+for enforcing compliance by third parties to this License.
 
   An "entity transaction" is a transaction transferring control of an
 organization, or substantially all assets of one, or subdividing an
@@ -629,8 +630,8 @@ free software which everyone can redistribute and change under these terms.
 
   To do so, attach the following notices to the program.  It is safest
 to attach them to the start of each source file to most effectively
-state the exclusion of warranty; and each file should have at least
-the "copyright" line and a pointer to where the full notice is found.
+state the exclusion of warranty; and each file should have at least the
+"copyright" line and a pointer to where the full notice is found.
 
     <one line to give the program's name and a brief idea of what it does.>
     Copyright (C) <year>  <name of author>
@@ -648,7 +649,7 @@ the "copyright" line and a pointer to where the full notice is found.
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-Also add information on how to contact you by electronic and paper mail.
+  Also add information on how to contact you by electronic and paper mail.
 
   If the program does terminal interaction, make it output a short
 notice like this when it starts in an interactive mode:
@@ -658,7 +659,7 @@ notice like this when it starts in an interactive mode:
     This is free software, and you are welcome to redistribute it
     under certain conditions; type `show c' for details.
 
-The hypothetical commands `show w' and `show c' should show the appropriate
+  The hypothetical commands `show w' and `show c' should show the appropriate
 parts of the General Public License.  Of course, your program's commands
 might be different; for a GUI interface, you would use an "about box".
 
