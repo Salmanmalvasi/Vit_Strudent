@@ -7,11 +7,11 @@
         <item name="postSplashScreenTheme">@style/Theme.VTOP</item>
     </style>
 
-    <!-- Base Theme -->
+    <!-- Base Theme - StudentCC Light Mode -->
     <style name="Base.Theme.VTOP" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
-        <!-- Custom Black and White Colors (Default) -->
+        <!-- StudentCC Light Mode Color Palette -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
@@ -58,8 +58,8 @@
         <item name="colorSecondaryContainer">@color/colorSecondaryContainerRed</item>
         <item name="colorOnSecondaryContainer">@color/colorOnSecondaryContainerRed</item>
 
-        <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorSurface">@color/colorSurfaceRed</item>
+        <item name="colorOnSurface">@color/colorOnSurfaceRed</item>
         <item name="colorSurfaceVariant">@color/colorSurfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/colorOnSurfaceVariant</item>
 
@@ -222,12 +222,12 @@
 
     <!-- Main Themes -->
     <style name="Theme.VTOP" parent="Base.Theme.VTOP">
-        <item name="android:windowBackground">@color/colorSurface</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
         <item name="chipStyle">@style/Widget.VTOP.Chip</item>
     </style>
 
     <style name="Theme.VTOP.Red" parent="Base.Theme.VTOP.Red">
-        <item name="android:windowBackground">@color/colorSurface</item>
+        <item name="android:windowBackground">@color/colorBackgroundRed</item>
         <item name="chipStyle">@style/Widget.VTOP.Chip</item>
     </style>
 
