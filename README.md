@@ -7,14 +7,7 @@
 
 > **StudentCC** is an unofficial Android application designed to provide VIT students with easy access to their academic information through a modern, user-friendly interface.
 
-## 📱 Screenshots
 
-<div align="center">
-  <img src="https://via.placeholder.com/300x600/2196F3/FFFFFF?text=Login+Screen" alt="Login Screen" width="150"/>
-  <img src="https://via.placeholder.com/300x600/4CAF50/FFFFFF?text=Home+Screen" alt="Home Screen" width="150"/>
-  <img src="https://via.placeholder.com/300x600/FF9800/FFFFFF?text=Performance" alt="Performance" width="150"/>
-  <img src="https://via.placeholder.com/300x600/9C27B0/FFFFFF?text=Profile" alt="Profile" width="150"/>
-</div>
 
 ## ✨ Features
 
@@ -148,4 +141,93 @@ cd Vit_Strudent
 3. Choose between light and dark mode
 4. Changes apply immediately
 
-## 🏗️ Architecture
+
+## 🛡️ Privacy & Security
+
+- **No External Storage**: All data is stored locally on your device
+- **Secure Authentication**: Uses VIT's official authentication system
+- **Privacy Policy**: Built-in privacy policy with detailed information
+- **Open Source**: Transparent codebase for community review
+- **No Tracking**: No analytics or tracking mechanisms
+
+## 📄 License
+
+This project is licensed under the **GNU General Public License v3.0** - see the [LICENSE](LICENSE) file for details.
+
+### License Summary
+- ✅ **Free to use**: You can use this software for any purpose
+- ✅ **Free to modify**: You can modify the source code
+- ✅ **Free to distribute**: You can share the software
+- ⚠️ **Copyleft**: Any derivative works must also be GPLv3
+
+## ⚠️ Disclaimer
+
+**This is an unofficial application and is not affiliated with VIT University.**
+
+- This app is developed independently by students for students
+- Use at your own discretion
+- The developers are not responsible for any data loss or issues
+- Always verify information with official VIT sources
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+### How to Contribute
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
+
+### Contribution Guidelines
+- Follow Android development best practices
+- Maintain code style consistency
+- Add proper documentation
+- Test your changes thoroughly
+- Update README if needed
+
+### Areas for Contribution
+- 🐛 **Bug Fixes**: Report and fix bugs
+- ✨ **New Features**: Add useful features
+- �� **UI/UX**: Improve user interface
+- �� **Documentation**: Enhance documentation
+- 🔧 **Performance**: Optimize app performance
+
+## 📞 Support
+
+### Getting Help
+- **Issues**: Report bugs and request features on [GitHub Issues](https://github.com/Salmanmalvasi/Vit_Strudent/issues)
+- **Discussions**: Join discussions on [GitHub Discussions](https://github.com/Salmanmalvasi/Vit_Strudent/discussions)
+- **Documentation**: Check the code comments and this README
+
+### Common Issues
+- **Login Problems**: Ensure you're using correct VIT credentials
+- **Sync Issues**: Check your internet connection
+- **Theme Not Working**: Restart the app after theme change
+- **Data Not Loading**: Try logging out and logging back in
+
+## �� Acknowledgments
+
+- **VIT University**: For providing the VTOP platform
+- **Android Community**: For open source libraries and tools
+- **Material Design**: For the design system
+- **Contributors**: Everyone who has contributed to this project
+
+## �� Project Statistics
+
+![GitHub stars](https://img.shields.io/github/stars/Salmanmalvasi/Vit_Strudent)
+![GitHub forks](https://img.shields.io/github/forks/Salmanmalvasi/Vit_Strudent)
+![GitHub issues](https://img.shields.io/github/issues/Salmanmalvasi/Vit_Strudent)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Salmanmalvasi/Vit_Strudent)
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Salmanmalvasi/Vit_Strudent&type=Date)](https://star-history.com/#Salmanmalvasi/Vit_Strudent&Date)
+
+---
+
+<div align="center">
+  <p><strong>Made with ❤️ by VIT Students for VIT Students</strong></p>
+  <p>If this project helps you, please give it a ⭐</p>
+</div>
